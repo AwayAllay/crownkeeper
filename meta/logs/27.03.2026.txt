@@ -1,0 +1,12 @@
+Done today:
+imagine a rough direction where to take the game
+learned about Ashley, Box2d, LibGDX, Tiled
+pixelt first test enemy
+
+To keep in mind:
+Alien takeover - you are the alien commander to take over the solar system.
+Planets closer to center get harder and more developed
+
+todos:
+be clear about faction
+get a tower concept

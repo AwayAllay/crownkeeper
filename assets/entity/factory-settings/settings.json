@@ -1,0 +1,11 @@
+
+{
+  "small-barbarian": {
+    "health": 20,
+    "velocity": 1.0,
+    "unit-height": 1.0,
+    "unit-width": 1.0,
+    "px-width": 32,
+    "px-height": 32
+  }
+}

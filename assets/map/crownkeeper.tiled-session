@@ -1,0 +1,70 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "fields/map/fieldTest.tmx",
+    "expandedProjectPaths": [
+        "fields/textures",
+        "fields/map",
+        ".",
+        "fields",
+        "fields/textures/tilesets"
+    ],
+    "fileStates": {
+        "fields/map/fieldTest.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 460.3333333333333,
+                "y": 337.33333333333326
+            }
+        },
+        "fields/textures/tilesets/Decorationtiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "fields/textures/tilesets/banners.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "fields/textures/tilesets/baseTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1.5
+        },
+        "fields/textures/tilesets/baseTilesetAdvanced.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "frame.defaultDuration": 10,
+    "last.imagePath": "C:/Users/lukas/eclipse-workspace/alienTakeover/assets/map/fields/textures/object-images/Animated/1 Flag",
+    "last.objectTemplatePath": "C:/Users/lukas/eclipse-workspace/alienTakeover/assets/map/fields/textures",
+    "map.height": 40,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 60,
+    "openFiles": [
+        "fields/map/fieldTest.tmx",
+        "fields/textures/tilesets/baseTileset.tsx",
+        "fields/textures/tilesets/Decorationtiles.tsx",
+        "fields/textures/tilesets/banners.tsx"
+    ],
+    "project": "crownkeeper.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "fields/textures/tilesets/banners.tsx",
+        "fields/textures/tilesets/Decorationtiles.tsx",
+        "fields/textures/tilesets/baseTileset.tsx",
+        "fields/map/fieldTest.tmx",
+        "fields/textures/tilesets/baseTilesetAdvanced.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 32
+    },
+    "tileset.type": 0
+}

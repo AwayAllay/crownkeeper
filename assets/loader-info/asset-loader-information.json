@@ -1,0 +1,64 @@
+
+{
+  "test-assets": [
+    {
+      "path": "map/testmap/testmap.tmx",
+      "type": "TiledMap"
+    },
+    {
+      "path": "entity/textures/barbarian-spritesheet.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/hammer.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/tower/noTowerTest.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/tower/towerTest1.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/ui-frame.png",
+      "type": "Texture"
+    },
+    {
+      "path": "entity/textures/tower/tower1Test.png",
+      "type": "Texture"
+    }
+  ],
+  "field-test-assets": [
+    {
+      "path": "map/fields/map/fieldTest.tmx",
+      "type": "TiledMap"
+    },
+    {
+      "path": "entity/textures/barbarian-spritesheet.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/hammer.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/tower/noTowerTest.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/tower/towerTest1.png",
+      "type": "Texture"
+    },
+    {
+      "path": "ui/tower-menu/ui-frame.png",
+      "type": "Texture"
+    },
+    {
+      "path": "entity/textures/tower/tower1Test.png",
+      "type": "Texture"
+    }
+  ]
+}
+
