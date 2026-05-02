@@ -7,7 +7,7 @@ import com.github.awayallay.screen.LevelScreen;
 import com.github.awayallay.util.Assets;
 import com.github.awayallay.util.JSONLoader;
 
-public class AlienTakeover extends Game {
+public class Crownkeeper extends Game {
 
     @Override
     public void create() {

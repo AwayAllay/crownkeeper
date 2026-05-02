@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.github.awayallay.AlienTakeover;
+import com.github.awayallay.Crownkeeper;
 import com.github.awayallay.map.MapLoader;
 import com.github.awayallay.map.MapManager;
 import com.github.awayallay.util.Assets;
@@ -22,7 +22,7 @@ public class LevelScreen extends GameScreen{
     private boolean finishedSetup = false;
 
 
-    public LevelScreen(AlienTakeover game,
+    public LevelScreen(Crownkeeper game,
                        Assets assets,
                        String assetBlock,
                        float unitScale,
