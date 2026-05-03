@@ -1,0 +1,5 @@
+ADD new maps after the following steps:
+
+1. add "path-layer" object layer - poly-lines for enemy paths that have to be named after index (path one called 0)
+2. add "build-spots" object layer - ellipses for marking the range of build-spots
+3. add lvl.json file for managing rendering (see "assets/loader-info/map-information")

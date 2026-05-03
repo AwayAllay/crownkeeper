@@ -317,12 +317,12 @@
   <object id="263" gid="189" x="777.909" y="64.1818" width="32" height="64"/>
   <object id="264" gid="189" x="885.909" y="64.1818" width="32" height="64"/>
  </objectgroup>
- <objectgroup id="8" name="path-layer">
+ <objectgroup id="8" name="path-layer" visible="0">
   <object id="293" name="0" x="873" y="-45">
    <polyline points="0,0 -1,581 -23,613 -369,614 -414,590 -417,231 -435,217 -666,214 -701,235 -701,776"/>
   </object>
  </objectgroup>
- <objectgroup id="9" name="build-spots">
+ <objectgroup id="9" name="build-spots" visible="0">
   <object id="294" x="895.75" y="161.75" width="60" height="60">
    <ellipse/>
   </object>

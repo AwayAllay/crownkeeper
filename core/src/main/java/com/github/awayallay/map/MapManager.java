@@ -4,12 +4,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class MapManager {
 
     private final MapLoader mapLoader;
-    private OrthogonalTiledMapRenderer mapRenderer;
+    private MapRenderer mapRenderer;
     private TiledMap map;
 
 
@@ -24,17 +23,14 @@ public class MapManager {
         mapLoader.loadPaths();
         mapLoader.loadBuildSpots();
 
-        mapRenderer = new OrthogonalTiledMapRenderer(map, mapUnitScale);
+        mapRenderer = new MapRenderer(map, mapUnitScale);
     }
 
 
-
     public void render(SpriteBatch batch, OrthographicCamera levelCamera) {
-
         mapRenderer.setView(levelCamera);
         mapRenderer.render();
-
-        //TODO: render all objects
+        mapRenderer.renderMapObjects(batch);
     }
 
     public int getMapWidth() {
