@@ -10,14 +10,11 @@ import com.github.awayallay.entity.component.*;
 import com.github.awayallay.entity.player.Player;
 import com.github.awayallay.entity.system.BuildSpotInteractionSystem;
 import com.github.awayallay.ui.TowerBuildUI;
-import com.github.awayallay.ui.TowerInteractionUI;
 
 public class GameInputHandler implements InputProcessor {
 
     private final Player player;
     private final OrthographicCamera camera;
-    private final ExtendViewport viewport;
-    private final TiledMap map;
     private boolean northPressed = false, eastPressed = false, southPressed = false, westPressed = false;
 
     private final BuildSpotInteractionSystem buildspotInteractionSystem;
@@ -29,8 +26,6 @@ public class GameInputHandler implements InputProcessor {
     public GameInputHandler(Player player, OrthographicCamera camera, ExtendViewport viewport, TiledMap map, BuildSpotInteractionSystem buildspotInteractionSystem, TowerBuildUI towerBuildUI) {
         this.player = player;
         this.camera = camera;
-        this.viewport = viewport;
-        this.map = map;
         this.buildspotInteractionSystem = buildspotInteractionSystem;
 
         mapHeightInUnits = map.getProperties().get("height", Integer.class);

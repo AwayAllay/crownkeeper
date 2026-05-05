@@ -4,17 +4,23 @@ import com.badlogic.ashley.core.Component;
 
 public class HealthComponent implements Component {
 
-    private float health;
+    private final int maxHealth;
+    private int health;
 
-    public HealthComponent(float health) {
-        this.health = health;
+    public HealthComponent(int maxHealth) {
+        this.maxHealth = maxHealth;
+        health = maxHealth;
     }
 
-    public float getHealth() {
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public int getHealth() {
         return health;
     }
 
-    public void setHealth(float health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 }

@@ -52,7 +52,7 @@ public class BuildSpotInteractionSystem extends IteratingSystem {
         }
 
         if (currentHovered != null) {
-            towerInteractionUI.showTowerInteractionUI(currentHovered);
+            //TODO: show interaction menu;
         }
     }
 

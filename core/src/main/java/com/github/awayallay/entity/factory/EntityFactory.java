@@ -41,6 +41,10 @@ public class EntityFactory {
         return entity;
     }
 
+    public void removeEntity(Entity entity) {
+        entityEngine.removeEntity(entity);
+    }
+
 
     public void update(float deltaTime) {
         entityEngine.update(deltaTime);

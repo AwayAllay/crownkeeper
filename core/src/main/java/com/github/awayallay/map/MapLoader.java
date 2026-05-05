@@ -47,8 +47,11 @@ public class MapLoader {
 
     public Vector2[] getPath (int pathIndex) {
         if (pathExtractor == null) return null;
-
         return pathExtractor.getPath(pathIndex);
+    }
+
+    public Vector2[][] getPaths() {
+        return pathExtractor.getPaths();
     }
 
     public BuildSpot[] getBuildSpots() {

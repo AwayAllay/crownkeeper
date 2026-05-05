@@ -46,6 +46,11 @@ public class TMXPathExtractor { //TODO: implement security for wrong or no named
     }
 
 
+    public Vector2[][] getPaths() {
+        return paths;
+    }
+
+
     /**Returns a random path on the map.*/
     public Vector2[] getRandomPath() {
         return getPath(random.nextInt(paths.length));

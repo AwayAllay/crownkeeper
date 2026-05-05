@@ -1,6 +1,8 @@
 
 {
   "small-barbarian": {
+    "texture-path": "entity/textures/barbarian-spritesheet.png",
+    "frame-duration": 0.05,
     "health": 20,
     "velocity": 1.0,
     "unit-height": 1.0,

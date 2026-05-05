@@ -10,4 +10,5 @@ public class ComponentMappers {
     public static final ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
     public static final ComponentMapper<FacingComponent> facing = ComponentMapper.getFor(FacingComponent.class);
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
+    public static final ComponentMapper<HealthComponent> health = ComponentMapper.getFor(HealthComponent.class);
 }

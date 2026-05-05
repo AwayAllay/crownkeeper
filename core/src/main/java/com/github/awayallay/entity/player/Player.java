@@ -8,17 +8,24 @@ import com.github.awayallay.entity.GameEntity;
 import com.github.awayallay.entity.component.*;
 import com.github.awayallay.entity.factory.EntityFactory;
 import com.github.awayallay.entity.tower.Tower;
+import com.github.awayallay.util.Assets;
 
 public class Player extends GameEntity {
 
     private Tower[] selectedTowers;
     private final EntityFactory factory;
+    private final float range = 1.5f;
 
 
-    public Player(Entity playerEntity, EntityFactory factory) {
-        super(playerEntity);
+    public Player(EntityFactory factory, Assets assets) {
+        super(factory, assets);
         this.factory = factory;
         selectedTowers = new Tower[6];
+    }
+
+    @Override
+    protected Entity createEntityContainer() {
+        return null;
     }
 
     @Override
@@ -75,10 +82,6 @@ public class Player extends GameEntity {
         }
     }
 
-    @Override
-    public void getDamages(float damageAmount) {
-
-    }
 
     @Override
     public void die() {
@@ -96,5 +99,9 @@ public class Player extends GameEntity {
 
     public void setSelectedTowers(Tower[] selectedTowers) {
         this.selectedTowers = selectedTowers;
+    }
+
+    public float getRange() {
+        return range;
     }
 }

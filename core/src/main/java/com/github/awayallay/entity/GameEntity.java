@@ -1,22 +1,42 @@
 package com.github.awayallay.entity;
 
 import com.badlogic.ashley.core.Entity;
+import com.github.awayallay.entity.component.AnimationComponent;
+import com.github.awayallay.entity.component.ComponentMappers;
+import com.github.awayallay.entity.component.HealthComponent;
+import com.github.awayallay.entity.component.VelocityComponent;
+import com.github.awayallay.entity.factory.EntityFactory;
+import com.github.awayallay.util.Assets;
 
 public abstract class GameEntity {
 
-    public GameEntity(Entity entity) {
-        this.entity = entity;
+    protected Entity entityContainer;
+    protected final EntityFactory entityFactory;
+    protected final Assets assets;
+
+    protected GameEntity(EntityFactory entityFactory, Assets assets) {
+        this.entityFactory = entityFactory;
+        this.assets = assets;
     }
 
-    protected final Entity entity;
-
-
+    protected abstract Entity createEntityContainer();
     public abstract void attack();
-    public abstract void getDamages(float damageAmount);
-    public abstract void die();
 
+
+    public void die() {
+        AnimationComponent animation = ComponentMappers.animation.get(entityContainer);
+
+        entityContainer.remove(VelocityComponent.class);
+        entityContainer.remove(HealthComponent.class);
+
+        animation.setCurrent(animation.getDie());
+    }
+
+    public void dispose() {
+        entityFactory.removeEntity(entityContainer);
+    }
 
     public Entity getEntity() {
-        return entity;
+        return entityContainer;
     }
 }

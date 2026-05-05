@@ -2,8 +2,10 @@ package com.github.awayallay.map;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 
 public class MapManager {
 
@@ -12,8 +14,9 @@ public class MapManager {
     private TiledMap map;
 
 
-    public MapManager(MapLoader mapLoader) {
+    public MapManager(MapLoader mapLoader, float mapUnitScale) {
         this.mapLoader = mapLoader;
+        setUp(mapUnitScale);
     }
 
     public void setUp(float mapUnitScale) {
@@ -45,5 +48,10 @@ public class MapManager {
         return layer.getHeight();
     }
 
+    public BuildSpot[] getBuildSpots() {
+        return mapLoader.getBuildSpots();
+    }
+
+    public Vector2[][] getPaths() {return mapLoader.getPaths();}
 
 }
