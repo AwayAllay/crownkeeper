@@ -50,6 +50,14 @@ public class InputHandler implements InputProcessor {
             position.setX(playerX);
             position.setY(playerY);
         }
+        else if (!mapManager.isSpotBlocked(playerX, position.getY())){
+            position.setX(playerX);
+            position.setY(position.getY());
+        }
+        else if (!mapManager.isSpotBlocked(position.getX(), playerY)) {
+            position.setX(position.getX());
+            position.setY(playerY);
+        }
 
         levelCamera.position.x = MathUtils.clamp(position.getX(), halfViewportWidth, mapUnitWidth - halfViewportWidth);
         levelCamera.position.y = MathUtils.clamp(position.getY(), halfViewportHeight, mapUnitHeight - halfViewportHeight);
