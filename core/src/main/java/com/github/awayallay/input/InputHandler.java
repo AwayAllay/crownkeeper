@@ -3,37 +3,30 @@ package com.github.awayallay.input;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.github.awayallay.entity.component.*;
 import com.github.awayallay.entity.player.Player;
-import com.github.awayallay.entity.system.BuildSpotInteractionSystem;
-import com.github.awayallay.ui.TowerBuildUI;
+import com.github.awayallay.map.MapManager;
 
-public class GameInputHandler implements InputProcessor {
+public class InputHandler implements InputProcessor {
 
     private final Player player;
-    private final OrthographicCamera camera;
+    private final OrthographicCamera levelCamera;
+    private final MapManager mapManager;
+    private final int mapUnitWidth ,mapUnitHeight;
+    private final float halfViewportWidth, halfViewportHeight;
+
     private boolean northPressed = false, eastPressed = false, southPressed = false, westPressed = false;
 
-    private final BuildSpotInteractionSystem buildspotInteractionSystem;
-    private final TowerBuildUI towerBuildUI;
-
-    private final int mapHeightInUnits, mapWidthInUnits;
-    private final float halfMapHeightInUnits, halfMapWidthInUnits;
-
-    public GameInputHandler(Player player, OrthographicCamera camera, ExtendViewport viewport, TiledMap map, BuildSpotInteractionSystem buildspotInteractionSystem, TowerBuildUI towerBuildUI) {
+    public InputHandler(Player player, OrthographicCamera levelCamera, ExtendViewport levelViewport, MapManager mapManager) {
         this.player = player;
-        this.camera = camera;
-        this.buildspotInteractionSystem = buildspotInteractionSystem;
-
-        mapHeightInUnits = map.getProperties().get("height", Integer.class);
-        halfMapHeightInUnits = viewport.getWorldHeight() / 2f;
-
-        mapWidthInUnits = map.getProperties().get("width", Integer.class);
-        halfMapWidthInUnits = viewport.getWorldWidth() / 2f;
-        this.towerBuildUI = towerBuildUI;
+        this.levelCamera = levelCamera;
+        this.mapManager = mapManager;
+        this.mapUnitWidth = mapManager.getMapUnitWidth();
+        this.mapUnitHeight = mapManager.getMapUnitHeight();
+        this.halfViewportWidth = levelViewport.getWorldWidth() / 2f;
+        this.halfViewportHeight = levelViewport.getWorldHeight() / 2f;
     }
 
     //Called every frame
@@ -46,26 +39,26 @@ public class GameInputHandler implements InputProcessor {
         float playerX = position.getX();
 
         if (northPressed) playerY = position.getY() + velocity.getY() * deltaTime;
-        if (eastPressed) playerX = position.getX() + velocity.getX() * deltaTime;
+        if (eastPressed && !westPressed) playerX = position.getX() + velocity.getX() * deltaTime;
         if (southPressed) playerY = position.getY() - velocity.getY() * deltaTime;
-        if (westPressed) playerX = position.getX() - velocity.getX() * deltaTime;
+        if (westPressed && !eastPressed) playerX = position.getX() - velocity.getX() * deltaTime;
 
-        playerX = MathUtils.clamp(playerX, 0, mapWidthInUnits);
-        playerY = MathUtils.clamp(playerY, 0, mapHeightInUnits);
+        playerX = MathUtils.clamp(playerX, 0, mapUnitWidth);
+        playerY = MathUtils.clamp(playerY, 0, mapUnitHeight);
 
-        position.setX(playerX);
-        position.setY(playerY);
+        if (!mapManager.isSpotBlocked(playerX, playerY)) {
+            position.setX(playerX);
+            position.setY(playerY);
+        }
 
-        camera.position.x = MathUtils.clamp(position.getX(), halfMapWidthInUnits, mapWidthInUnits - halfMapWidthInUnits);
-        camera.position.y = MathUtils.clamp(position.getY(), halfMapHeightInUnits, mapHeightInUnits - halfMapHeightInUnits);
+        levelCamera.position.x = MathUtils.clamp(position.getX(), halfViewportWidth, mapUnitWidth - halfViewportWidth);
+        levelCamera.position.y = MathUtils.clamp(position.getY(), halfViewportHeight, mapUnitHeight - halfViewportHeight);
 
-        camera.update();
+        levelCamera.update();
     }
-
 
     @Override
     public boolean keyDown(int keycode) {
-
         FacingComponent facing = ComponentMappers.facing.get(player.getEntity());
         AnimationComponent animation = ComponentMappers.animation.get(player.getEntity());
 
@@ -77,7 +70,7 @@ public class GameInputHandler implements InputProcessor {
             }
             case Input.Keys.D -> {
                 facing.setFacing(Facing.EAST);
-                animation.setCurrent(animation.getWalkEast());
+                if (!westPressed) animation.setCurrent(animation.getWalkEast());
                 eastPressed = true;
             }
             case Input.Keys.S -> {
@@ -86,17 +79,17 @@ public class GameInputHandler implements InputProcessor {
             }
             case Input.Keys.A -> {
                 facing.setFacing(Facing.WEST);
-                animation.setCurrent(animation.getWalkWest());
+                 animation.setCurrent(animation.getWalkWest());
                 westPressed = true;
             }
             case Input.Keys.E -> {
-                if (buildspotInteractionSystem.getCurrentHovered() != null) {
-                    if (!towerBuildUI.isOpen()) {
-                        towerBuildUI.open(buildspotInteractionSystem.getCurrentHovered());
-                    } else {
-                        towerBuildUI.close();
-                    }
-                }
+//                if (buildspotInteractionSystem.getCurrentHovered() != null) {
+//                    if (!towerBuildUI.isOpen()) {
+//                        towerBuildUI.open(buildspotInteractionSystem.getCurrentHovered());
+//                    } else {
+//                        towerBuildUI.close();
+//                    }
+//                }
             }
         }
 
@@ -105,7 +98,6 @@ public class GameInputHandler implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-
         switch (keycode) {
 
             case Input.Keys.W -> {
@@ -130,27 +122,12 @@ public class GameInputHandler implements InputProcessor {
     }
 
     @Override
-    public boolean scrolled(float amountX, float amountY) {
-        towerBuildUI.scroll(amountY);
-        return true;
-    }
-
-    @Override
     public boolean keyTyped(char character) {
         return false;
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-        if (towerBuildUI.isOpen()) {
-            towerBuildUI.selectTower();
-        }
-        else {
-            player.attack();
-        }
-
-
         return false;
     }
 
@@ -171,6 +148,11 @@ public class GameInputHandler implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
         return false;
     }
 }

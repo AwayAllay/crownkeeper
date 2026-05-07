@@ -9,5 +9,16 @@
     "unit-width": 1.0,
     "px-width": 32,
     "px-height": 32
+  },
+  "player": {
+    "texture-path": "entity/textures/barbarian-spritesheet.png",
+    "frame-duration": 0.05,
+    "health": 100,
+    "velocity": 2.0,
+    "unit-height": 1.0,
+    "unit-width": 1.0,
+    "px-width": 32,
+    "px-height": 32,
+    "unit-reach": 1.5
   }
 }

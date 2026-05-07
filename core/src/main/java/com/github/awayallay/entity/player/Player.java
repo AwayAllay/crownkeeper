@@ -1,36 +1,38 @@
 package com.github.awayallay.entity.player;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.JsonValue;
 import com.github.awayallay.entity.GameEntity;
 import com.github.awayallay.entity.component.*;
 import com.github.awayallay.entity.factory.EntityFactory;
 import com.github.awayallay.entity.tower.Tower;
+import com.github.awayallay.util.AnimationExtractor;
 import com.github.awayallay.util.Assets;
 
 public class Player extends GameEntity {
 
-    private Tower[] selectedTowers;
-    private final EntityFactory factory;
-    private final float range = 1.5f;
 
+    private final JsonValue settings;
+    private final PositionComponent pos;
+    private final float reach;
 
-    public Player(EntityFactory factory, Assets assets) {
-        super(factory, assets);
-        this.factory = factory;
-        selectedTowers = new Tower[6];
-    }
-
-    @Override
-    protected Entity createEntityContainer() {
-        return null;
+    public Player(EntityFactory entityFactory, Assets assets, JsonValue factorySettings, PositionComponent pos) {
+        super(entityFactory, assets);
+        this.settings = factorySettings.get("player");
+        this.pos = pos;
+        this.reach = settings.getFloat("unit-reach");
+        entityContainer = createEntityContainer();
+        entityFactory.addEntity(entityContainer);
     }
 
     @Override
     public void attack() {
-
         Entity target = getTarget();
         if (target == null) return;
 
@@ -38,9 +40,9 @@ public class Player extends GameEntity {
     }
 
     private Entity getTarget() {
-        PositionComponent pos = ComponentMappers.position.get(getPlayerEntity());
-        FacingComponent facingComponent = ComponentMappers.facing.get(getPlayerEntity());
-        ImmutableArray<Entity> entities = factory.getEntities(Family.all(HealthComponent.class, PositionComponent.class).get());
+        PositionComponent pos = ComponentMappers.position.get(entityContainer);
+        FacingComponent facingComponent = ComponentMappers.facing.get(entityContainer);
+        ImmutableArray<Entity> entities = entityFactory.getEntities(Family.all(HealthComponent.class, PositionComponent.class).get());
 
 
         Entity target = null;
@@ -50,7 +52,7 @@ public class Player extends GameEntity {
             PositionComponent entPos = ComponentMappers.position.get(entity);
             Vector2 dir = new Vector2(pos.getX() - entPos.getX(), pos.getY() - entPos.getY());
 
-            if (dir.len() > 0.5f * 32f) continue;
+            if (dir.len() > reach) continue;
 
             if (getDirection(dir).equals(facingComponent.getFacing())) {
 
@@ -82,26 +84,59 @@ public class Player extends GameEntity {
         }
     }
 
-
     @Override
-    public void die() {
-
+    protected Entity createEntityContainer() {
+        return entityFactory.createEntity(new Component[]{
+            getAnimationComponent(),
+            getFacingComponent(),
+            getHealthComponent(),
+            getVelocityComponent(),
+            pos,
+            new PlayerComponent()
+        });
     }
 
 
-    public Entity getPlayerEntity() {
-        return getEntity();
+    private AnimationComponent getAnimationComponent() {
+
+        TextureRegion[][] animations = new AnimationExtractor(assets)
+            .extractAnimations(
+              settings.getString("texture-path"),
+                settings.getInt("px-width"),
+                settings.getInt("px-height")
+            );
+
+        return new AnimationComponent(
+            null,
+            new Animation<>(settings.getFloat("frame-duration"), animations[1]),
+            null,
+            new Animation<>(settings.getFloat("frame-duration"), animations[0]),
+            null,
+            null,
+            null,
+            settings.getFloat("unit-height"),
+            settings.getFloat("unit-width")
+        );
+    }
+
+    private FacingComponent getFacingComponent() {
+        return new FacingComponent(Facing.EAST);
+    }
+
+    private HealthComponent getHealthComponent() {
+        return new HealthComponent(settings.getInt("health"));
+    }
+
+    private VelocityComponent getVelocityComponent() {
+        return new VelocityComponent(settings.getFloat("velocity"), settings.getFloat("velocity"));
+    }
+
+
+    public float getReach() {
+        return reach;
     }
 
     public Tower[] getSelectedTowers() {
-        return selectedTowers;
-    }
-
-    public void setSelectedTowers(Tower[] selectedTowers) {
-        this.selectedTowers = selectedTowers;
-    }
-
-    public float getRange() {
-        return range;
+        return null;
     }
 }

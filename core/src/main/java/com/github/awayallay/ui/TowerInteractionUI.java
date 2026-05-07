@@ -24,12 +24,12 @@ public class TowerInteractionUI {
 
     public void update(Player player) {
 
-        PositionComponent pos = ComponentMappers.position.get(player.getPlayerEntity());
+        PositionComponent pos = ComponentMappers.position.get(player.getEntity());
 
         Circle reachCircle = new Circle(
             pos.getX(),
             pos.getY(),
-            player.getRange()
+            player.getReach()
         );
 
         for (BuildSpot buildSpot : buildSpots) {

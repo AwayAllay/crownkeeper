@@ -5,19 +5,19 @@
     },
     "activeFile": "fields/map/fieldTest.tmx",
     "expandedProjectPaths": [
+        "fields",
+        "fields/map",
         "fields/textures/tilesets",
         "fields/textures",
-        ".",
-        "fields/map",
-        "fields"
+        "."
     ],
     "fileStates": {
         "fields/map/fieldTest.tmx": {
-            "scale": 1,
-            "selectedLayer": 5,
+            "scale": 1.5,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 600,
-                "y": 396
+                "x": 652,
+                "y": 341.33333333333337
             }
         },
         "fields/textures/tilesets/Decorationtiles.tsx": {
