@@ -8,11 +8,9 @@ public abstract class GameScreen implements Screen {
 
     protected final Crownkeeper game;
     protected final Assets assets;
-    protected final String assetBlock;
 
-    protected GameScreen(Crownkeeper game, Assets assets, String assetBlock) {
+    protected GameScreen(Crownkeeper game, Assets assets) {
         this.game = game;
         this.assets = assets;
-        this.assetBlock = assetBlock;
     }
 }

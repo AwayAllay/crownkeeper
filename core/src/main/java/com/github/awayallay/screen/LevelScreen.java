@@ -21,13 +21,13 @@ import com.github.awayallay.util.JSONLoader;
 
 public class LevelScreen extends GameScreen {
 
-    private final String mapInformation;
     private final float unitScale, minWorldWidth, minWorldHeight;
+    private final JsonValue levelInformation;
+    private final JsonValue factorySettings;
     private SpriteBatch batch;
     private OrthographicCamera levelCamera;
     private ExtendViewport levelViewport;
     private MapManager mapManager;
-    private JsonValue levelInformation;
     private UIManager uiManager;
     private EnemyManager enemyManager;
     private EntityFactory entityFactory;
@@ -38,34 +38,30 @@ public class LevelScreen extends GameScreen {
 
     public LevelScreen(Crownkeeper game,
                        Assets assets,
-                       String assetBlock,
                        float unitScale,
                        float minWorldWidth,
                        float minWorldHeight,
-                       String mapInformation) {
-        super(game, assets, assetBlock);
+                       JsonValue levelInformation,
+                       JsonValue factorySettings) {
+        super(game, assets);
         this.unitScale = unitScale;
         this.minWorldWidth = minWorldWidth;
         this.minWorldHeight = minWorldHeight;
-        this.mapInformation = mapInformation;
-
+        this.levelInformation = levelInformation;
+        this.factorySettings = factorySettings;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        assets.loadAssetBlock(assetBlock);
         levelCamera = new OrthographicCamera();
         levelViewport = new ExtendViewport(minWorldWidth, minWorldHeight, levelCamera);
     }
 
     @Override
     public void render(float delta) {
-        assets.update();
-        if (!assets.finishedLoading()) return; //TODO: show loading Screen
 
         if (!finishedSetup) finishSetup();
-
 
         levelViewport.apply();
         levelCamera.update();
@@ -84,7 +80,6 @@ public class LevelScreen extends GameScreen {
     }
 
     private void finishSetup() {
-        levelInformation = new JSONLoader().loadJSON(mapInformation);
         mapManager = new MapManager(new MapLoader(assets, levelInformation), unitScale);
         levelCamera.position.set(mapManager.getMapUnitWidth() / 2f, mapManager.getMapUnitHeight() / 2f, 0);
         entityFactory = new EntityFactory();
@@ -95,7 +90,7 @@ public class LevelScreen extends GameScreen {
         player = new Player(
             entityFactory,
             assets,
-            new JSONLoader().loadJSON("entity/factory-settings/settings.json"),
+            factorySettings,
             new PositionComponent(mapManager.getMapUnitWidth() / 2, mapManager.getMapUnitHeight() / 2)
         );
         enemyManager = new EnemyManager(assets, entityFactory, mapManager);

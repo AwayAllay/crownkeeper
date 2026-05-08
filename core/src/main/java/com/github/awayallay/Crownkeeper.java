@@ -2,6 +2,7 @@ package com.github.awayallay;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.github.awayallay.screen.LevelLoadingScreen;
 import com.github.awayallay.screen.LevelScreen;
 //import com.github.awayallay.screen.TestScreen;
 import com.github.awayallay.util.Assets;
@@ -16,7 +17,8 @@ public class Crownkeeper extends Game {
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 
         //setScreen(new TestScreen(this, assets, "foobar"));
-        setScreen(new LevelScreen(this, assets, "field-test-assets", 1f / 32f, 26, 16, "loader-info/map-information/lvl1.json"));
+        //setScreen(new LevelScreen(this, assets, "field-test-assets", 1f / 32f, 26, 16, "loader-info/map-information/lvl1.json"));
+        setScreen(new LevelLoadingScreen(this, assets, "field-test-assets", 1f / 32f, 26, 16, "loader-info/map-information/lvl1.json"));
 
     }
 }
