@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.github.awayallay.entity.component.*;
@@ -91,5 +92,10 @@ public class Enemy extends GameEntity {
     @Override
     public void attack() {
 
+    }
+
+    @Override
+    public Rectangle hitbox() {
+        return null;
     }
 }

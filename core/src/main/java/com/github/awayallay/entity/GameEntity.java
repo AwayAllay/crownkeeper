@@ -1,6 +1,7 @@
 package com.github.awayallay.entity;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Rectangle;
 import com.github.awayallay.entity.component.AnimationComponent;
 import com.github.awayallay.entity.component.ComponentMappers;
 import com.github.awayallay.entity.component.HealthComponent;
@@ -32,10 +33,11 @@ public abstract class GameEntity {
         animation.setCurrent(animation.getDie());
     }
 
+    public abstract Rectangle hitbox();
+
     public void dispose() {
         entityFactory.removeEntity(entityContainer);
     }
-
     public Entity getEntity() {
         return entityContainer;
     }

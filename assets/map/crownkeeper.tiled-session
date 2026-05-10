@@ -6,18 +6,18 @@
     "activeFile": "fields/map/fieldTest.tmx",
     "expandedProjectPaths": [
         "fields",
-        "fields/map",
-        "fields/textures/tilesets",
+        ".",
         "fields/textures",
-        "."
+        "fields/map",
+        "fields/textures/tilesets"
     ],
     "fileStates": {
         "fields/map/fieldTest.tmx": {
             "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 652,
-                "y": 341.33333333333337
+                "x": 486.66666666666663,
+                "y": 397.99999999999994
             }
         },
         "fields/textures/tilesets/Decorationtiles.tsx": {

@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.github.awayallay.entity.GameEntity;
@@ -39,6 +40,15 @@ public class Player extends GameEntity {
         //TODO do damage
     }
 
+    @Override
+    public Rectangle hitbox() {
+        return new Rectangle(pos.getX(), pos.getY(), settings.getFloat("px-width"), settings.getFloat("px-height"));
+    }
+
+    public Rectangle hitbox(float x, float y) {
+        return new Rectangle(x, y, settings.getFloat("px-width"), settings.getFloat("px-height"));
+    }
+
     private Entity getTarget() {
         PositionComponent pos = ComponentMappers.position.get(entityContainer);
         FacingComponent facingComponent = ComponentMappers.facing.get(entityContainer);
@@ -67,7 +77,7 @@ public class Player extends GameEntity {
         return target;
     }
 
-    private  Facing getDirection(Vector2 dir) {
+    private Facing getDirection(Vector2 dir) {
 
         if (Math.abs(dir.x) > Math.abs(dir.y)) {
             if (dir.x > 0) {
@@ -101,7 +111,7 @@ public class Player extends GameEntity {
 
         TextureRegion[][] animations = new AnimationExtractor(assets)
             .extractAnimations(
-              settings.getString("texture-path"),
+                settings.getString("texture-path"),
                 settings.getInt("px-width"),
                 settings.getInt("px-height")
             );

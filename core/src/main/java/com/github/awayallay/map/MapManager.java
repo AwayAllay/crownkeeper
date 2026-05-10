@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class MapManager {
     }
 
 
-    public boolean isSpotBlocked(float x, float y) {
+    public boolean collides(float x, float y) {
         for (Polygon mapCollisionBox : mapCollisionBoxes) {
             if (mapCollisionBox.contains(x, y)) {
                 return true;

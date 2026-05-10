@@ -46,15 +46,15 @@ public class InputHandler implements InputProcessor {
         playerX = MathUtils.clamp(playerX, 0, mapUnitWidth);
         playerY = MathUtils.clamp(playerY, 0, mapUnitHeight);
 
-        if (!mapManager.isSpotBlocked(playerX, playerY)) {
+        if (!mapManager.collides(playerX, playerY)) {
             position.setX(playerX);
             position.setY(playerY);
         }
-        else if (!mapManager.isSpotBlocked(playerX, position.getY())){
+        else if (!mapManager.collides(playerX, position.getY())){
             position.setX(playerX);
             position.setY(position.getY());
         }
-        else if (!mapManager.isSpotBlocked(position.getX(), playerY)) {
+        else if (!mapManager.collides(position.getX(), playerY)) {
             position.setX(position.getX());
             position.setY(playerY);
         }

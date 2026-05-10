@@ -17,7 +17,6 @@ import com.github.awayallay.map.MapLoader;
 import com.github.awayallay.map.MapManager;
 import com.github.awayallay.ui.UIManager;
 import com.github.awayallay.util.Assets;
-import com.github.awayallay.util.JSONLoader;
 
 public class LevelScreen extends GameScreen {
 
